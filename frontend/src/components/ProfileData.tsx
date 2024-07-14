@@ -43,7 +43,7 @@ const ProfileData = () => {
           <div className="flex flex-col gap-2 w-44 sm:w-24">
           <h1 className=" font-semibold text-sm sm:text-xs">{
             meal ===5 ? "Meals are ready ": "Meal ready in"} {meal === 5 ? "00:00" : `00:${timer.toString().padStart(2, "0")}`}</h1>
-          <div className="flex mx-auto " >
+          <div className="flex mx-auto overflow-hidden rounded-2xl " >
             {
                 Array(meal).fill(0).map((_,index) => (
                     <div key={index} className="w-6 h-3 border bg-green-500 sm:w-3"></div>
