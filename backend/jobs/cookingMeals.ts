@@ -19,8 +19,8 @@ const cookMeal = async (userId: string) => {
   }
 };
 
-// Schedule a cron job to run every 10 seconds
-cron.schedule('*/10 * * * * *', async () => {
+// Schedule a cron job to run every 10 min
+cron.schedule('*/10 * * * *', async () => {
   try {
     console.log('Cron job for cooking meals running...');
     const allUsers = await User.find({ meals: { $lt: 5 } });

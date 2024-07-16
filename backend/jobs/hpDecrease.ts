@@ -51,8 +51,8 @@ const decreaseHP = async (pokemonId: string) => {
     }
   };
   
-// Schedule a cron job to run every 10 seconds
-cron.schedule("*/10 * * * * *", async () => {
+// Schedule a cron job to run every 3 hrs
+cron.schedule("0 */3 * * *", async () => {
   try {
     console.log("Cron job for hp decrease running...");
     const alivePokemons = await Pokemon.find({ died: false });
