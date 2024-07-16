@@ -11,7 +11,7 @@ import { useRecoilState } from 'recoil';
 
 const Register = () => {
     const [loading, setLoading] = useState(false);
-    const [user, setUser] = useRecoilState(User);
+    const [_user, setUser] = useRecoilState(User);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

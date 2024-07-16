@@ -17,10 +17,10 @@ import { Toaster } from "react-hot-toast";
 
 function App() {
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useRecoilState(User);
-  const [userData, setUserData] = useRecoilState(UserData);
+  const [_user, setUser] = useRecoilState(User);
+  const [userData, _setUserData] = useRecoilState(UserData);
 
-  const [allUsers, setAllUsers] = useRecoilState(allUser);
+  const [_allUsers, setAllUsers] = useRecoilState(allUser);
 
   useEffect(() => {
     setTimeout(() => {
