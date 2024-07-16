@@ -1,9 +1,18 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import {typeColor} from '../assets/pokemon.js'
 
-const PokemonFullCard = ({pokemon, close}) => {
+const PokemonFullCard = ({pokemon, close , adoptFunction , loader , user}) => {
+    const navigate = useNavigate()
     const color = typeColor[pokemon?.type];
 
+    const handleFunction = async ()=>{
+      await  adoptFunction(pokemon.speciesName)
+     
+        navigate(`/profile/${user.id}`)
+      
+
+    }
     
   return (
     <div className="w-full  h-screen z-50 bg-black bg-opacity-25 flex flex-col items-center justify-center p-8 sm:p-6">
@@ -29,7 +38,11 @@ const PokemonFullCard = ({pokemon, close}) => {
         }
         <p className="text-lg font-semibold ">Next Evolution: {pokemon.evolveTo ? pokemon.evolveTo : "No Evolution"}</p>
 
-      <button className=' px-8 mt-auto py-6 mx-auto ml-10 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-700 sm:mt-20'>Adopt at {pokemon.price} Coins</button>
+      <button onClick={
+        handleFunction
+        
+      } disabled={loader}
+       className=' px-8 mt-auto py-6 mx-auto ml-10 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-700 sm:mt-20'>Adopt at {pokemon.price} Coins</button>
       </div>
 
       <button
@@ -41,7 +54,7 @@ const PokemonFullCard = ({pokemon, close}) => {
       </button>
     </div>
     <div className='flex gap-5 justify-center mt-5'>
-        {/* <button className='px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-700'>Buy</button> */}
+       
 </div>
 
   </div>

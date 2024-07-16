@@ -1,9 +1,57 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import logo from "../assets/logo.png";
 import bg from "../assets/bg2.png";
 import { Link } from "react-router-dom";
+import {loginUser} from '../services/api'
+import toast from 'react-hot-toast';
+import { useNavigate } from "react-router-dom";
+import { User } from "../recoil/atom";
+import { useRecoilState } from "recoil";
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const [user, setUser] = useRecoilState(User);
+
+  useEffect(() => {
+    if(user){
+      navigate('/');
+    }
+  }, [user])
+
+
+
+
+  const handleRegister = async () => {
+    
+   if (!password || !email) {
+      toast.error('Please fill all fields');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const user = await loginUser({ email, password});
+      if(user){
+        toast.success('Login successfully');
+        setEmail('');
+        setPassword('');
+        // console.log(user.user);
+        localStorage.setItem('evolutionx', JSON.stringify(user));
+        setUser(user.user);
+        navigate('/');
+      }
+   
+      
+    } catch (error) {
+      toast.error('Failed to Login user');
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
   return (
     <div className="flex  w-screen">
    
@@ -14,7 +62,7 @@ const Login = () => {
           <h1 className="text-6xl font-bold text-transparent bg-clip-text  transition-all duration-300 ease-in-out  font-outline-2 ">
             Evolution X
           </h1>
-          {/* <Lottie animationData={pokeball} className='w-28 ' /> */}
+      
           <img src={logo} alt="" className="w-16 animate-bounce sm:hidden" />
         </div>
         <form action="" className="flex flex-col gap-5">
@@ -27,6 +75,8 @@ const Login = () => {
               type="email"
               name="email"
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="example@example.com"
               className="px-4 bg-gray-800 py-3 rounded-lg text-white"
             />
@@ -40,6 +90,8 @@ const Login = () => {
               type="password"
               name="password"
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="********"
               className="px-4 bg-gray-800 py-3 rounded-lg text-white"
             />
@@ -52,6 +104,8 @@ const Login = () => {
             cursor:
               "url(https://cur.cursors-4u.net/games/gam-13/gam1309.png), auto",
           }}
+          onClick={handleRegister}
+          disabled={loading}
         >
           <p className="text-black text-lg font-bold group-hover:font-outline-1 tracking-wide  transition-all duration-200 ease-in-out  group-hover:text-transparent ">
             Login
@@ -60,7 +114,7 @@ const Login = () => {
           <img
             src={logo}
             alt=""
-            className="w-10 group-hover:animate-spin  transition-all duration-200 ease-in-out"
+            className={`w-10  transition-all duration-200 ease-in-out ${loading ? 'animate-spin' : ''}`}
           />
         </button>
 

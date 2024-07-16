@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import pokeball from "../assets/pokeball.svg";
 import { Link } from "react-router-dom";
+import { useRecoilState  } from "recoil";
+import {User } from "../recoil/atom";
 
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const user = localStorage.getItem("evolutionx_user");
+  const [user, setUser] = useRecoilState(User);
+
+
 
   return (
     <div className="relative ">
@@ -45,7 +49,7 @@ const Navbar = () => {
           
           className={`flex flex-col gap-10 ml-20 w-1/2 sm:w-full sm:ml-0`}
         >
-          <Link to="/" style={{ cursor: 'url(https://cur.cursors-4u.net/games/gam-13/gam1309.png), auto' }} className="text-white text-6xl font-semibold flex gap-5 w-fit  hover:font-outline-2 group hover:text-transparent transition-all duration-200 ease-in-out "
+          <Link to="/" style={{ cursor: 'url(https://cur.cursors-4u.net/games/gam-13/gam1309.png), auto' }} className="text-white text-6xl sm:text-5xl font-semibold flex gap-5 w-fit  hover:font-outline-2 group hover:text-transparent transition-all duration-200 ease-in-out "
           onClick={() => {
             setIsOpen(false);
           }}>
@@ -57,7 +61,7 @@ const Navbar = () => {
             Home
           </Link>
           {user && (
-            <Link to="/profile/example" className="text-white text-6xl font-semibold flex gap-5 group w-fit   hover:font-outline-2 hover:text-transparent transition-all duration-200 ease-in-out"
+            <Link to={`/profile/${user.id}`} className="text-white text-6xl sm:text-5xl font-semibold flex gap-5 group w-fit   hover:font-outline-2 hover:text-transparent transition-all duration-200 ease-in-out"
             style={{ cursor: 'url(https://cur.cursors-4u.net/games/gam-13/gam1309.png), auto' }}
             onClick={() => {
               setIsOpen(false);
@@ -71,7 +75,8 @@ const Navbar = () => {
           </Link>
           )}
           {user && (
-            <Link to="/adoptioncenter" className="text-white text-6xl font-semibold flex gap-5 group w-fit   hover:font-outline-2 hover:text-transparent transition-all duration-200 ease-in-out"
+            <>
+            <Link to="/adoptioncenter" className="text-white text-6xl sm:text-5xl font-semibold flex gap-5 group w-fit   hover:font-outline-2 hover:text-transparent transition-all duration-200 ease-in-out"
             style={{ cursor: 'url(https://cur.cursors-4u.net/games/gam-13/gam1309.png), auto' }}
             onClick={() => {
               setIsOpen(false);
@@ -83,8 +88,7 @@ const Navbar = () => {
             />
             Adoption Center
           </Link>
-          )}
-          <Link to="/topplayer" className="text-white text-6xl font-semibold flex gap-5 group w-fit   hover:font-outline-2 hover:text-transparent transition-all duration-200 ease-in-out"
+          <Link to="/topplayer" className="text-white text-6xl sm:text-5xl font-semibold flex gap-5 group w-fit   hover:font-outline-2 hover:text-transparent transition-all duration-200 ease-in-out"
           style={{ cursor: 'url(https://cur.cursors-4u.net/games/gam-13/gam1309.png), auto' }}
           onClick={() => {
             setIsOpen(false);
@@ -95,12 +99,14 @@ const Navbar = () => {
               className="group-hover:w-10 h-10 my-auto w-0  transition-all duration-200 ease-in-out "
             />
             Top Players
-          </Link>
+          </Link></>
+          )}
 
           {user ?(
-            <li className="text-white text-6xl font-semibold flex gap-5 group w-fit   hover:font-outline-2 hover:text-transparent transition-all duration-200 ease-in-out" 
+            <li className="text-white text-6xl sm:text-5xl font-semibold flex gap-5 group w-fit   hover:font-outline-2 hover:text-transparent transition-all duration-200 ease-in-out" 
             onClick={() => {
-              localStorage.removeItem("evolutionx_user");
+              localStorage.removeItem("evolutionx");
+              setUser(null);
               setIsOpen(false);
             }}>
             <img
@@ -111,7 +117,7 @@ const Navbar = () => {
             Logout
           </li>
           ):
-          <Link to="/login" className="text-white text-6xl font-semibold flex gap-5 group w-fit  hover:font-outline-2 hover:text-transparent transition-all duration-200 ease-in-out"
+          <Link to="/login" className="text-white text-6xl sm:text-5xl font-semibold flex gap-5 group w-fit  hover:font-outline-2 hover:text-transparent transition-all duration-200 ease-in-out"
           style={{ cursor: 'url(https://cur.cursors-4u.net/games/gam-13/gam1309.png), auto' }} 
           onClick={() => {
             setIsOpen(false);

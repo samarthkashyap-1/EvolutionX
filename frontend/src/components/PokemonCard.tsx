@@ -4,16 +4,17 @@ import { data, typeColor } from "../assets/pokemon.js";
 const PokemonCard = ({ pokemon }) => {
   const color = typeColor[pokemon?.type];
 
+
   return (
     <div
       className="relative flex flex-col w-fit  border-2 rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-200 ease-in-out"
       style={{ backgroundColor: color }}
     >
-      <div className="relative mx-8 w-36 h-28 sm:w-44 sm:h-36  ">
+      <div className="relative mx-8 w-36 h-28 sm:w-44 sm:h-24  ">
         <img
           src={pokemon?.image}
           alt={pokemon?.speciesName}
-          className="absolute left-0 top-0 w-full h-full object-contain scale-[1.5] z-10  transform -translate-y-8"
+          className="absolute left-0 top-0 w-full h-full object-contain scale-[1.5]  sm:scale-[1.7] z-10  transform -translate-y-8"
           
           
         />
