@@ -1,5 +1,5 @@
-import React from "react";
-import { data, typeColor } from "../assets/pokemon.js";
+
+import { typeColor } from "../assets/pokemon.js";
 
 const PokemonCard = ({ pokemon }) => {
   const color = typeColor[pokemon?.type];

@@ -1,6 +1,6 @@
-import React,{useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import trophie from '../assets/trophie.svg'
-import { useRecoilState, useRecoilValue } from 'recoil';
+import {  useRecoilValue } from 'recoil';
 import { User, allUser } from '../recoil/atom';
 import Lottie from 'lottie-react';
 import pokiball from '../assets/pokeball-loader.json';
@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 const TopPlayer = () => {
   const user = useRecoilValue(User);
-  const [users, setUsers] = useRecoilState(allUser);
+  const users= useRecoilValue(allUser);
   const [displayUsers, setDisplayUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();

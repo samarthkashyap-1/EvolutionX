@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { disownPokemon, getHealth, feedPokemon, evolvePokemon } from "../services/api.js";
 import { typeColor } from "../assets/pokemon.js";
 import toast from "react-hot-toast";
@@ -11,7 +11,7 @@ const PokemonData = () => {
   const [selectedPokemon, setSelectedPokemon] = useState(userData.pokemons[0] || null);
   const [hp, setHp] = useState(selectedPokemon.health || 0);
   const [color, setColor] = useState(typeColor[selectedPokemon.type]);
-  const [meal, setMeal] = useState(userData.meals);
+
 
   useEffect(() => {
     setColor(typeColor[selectedPokemon.type]);
@@ -174,7 +174,7 @@ const PokemonData = () => {
           </div>
           <div className="flex gap-6 sm:mt-auto sm:justify-center w-full sm:gap-2">
             <button
-              className={`text-3xl sm:text-lg sm:px-6 sm:py-3 border-4 ${meal > 0 ? "bg-green-500" : "bg-red-500"} text-white font-semibold px-16 py-6 rounded-2xl`}
+              className={`text-3xl sm:text-lg sm:px-6 sm:py-3 border-4 ${userData.meals > 0 ? "bg-green-500" : "bg-red-500"} text-white font-semibold px-16 py-6 rounded-2xl`}
               onClick={handleFeed}
               disabled={loading}
             >

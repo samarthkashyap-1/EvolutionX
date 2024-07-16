@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import ProfileData from './ProfileData';
 import PokemonData from './PokemonData';
 import { useRecoilState } from 'recoil';
