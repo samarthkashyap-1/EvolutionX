@@ -46,6 +46,7 @@ const PokemonDisplay: React.FC = () => {
 
   const handleAdopt = async (name: string) => {
     setLoading(true);
+    toast("Adopting...");
     try {
       const adopting = await adoptPokemon({ speciesName: name });
       if (adopting) {

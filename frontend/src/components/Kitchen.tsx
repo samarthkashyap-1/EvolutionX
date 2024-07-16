@@ -6,7 +6,7 @@ import { useRecoilValue } from "recoil";
 
 const Kitchen = () => {
   const userData = useRecoilValue(UserData);
-  const [timer, setTimer] = useState(10);
+  // const [timer, setTimer] = useState(600); // 10 minutes in seconds
   const [meal, setMeal] = useState(userData.meals);
 
   const fetchMeals = async () => {
@@ -19,34 +19,32 @@ const Kitchen = () => {
   };
 
   useEffect(() => {
-    const timerInterval = setInterval(() => {
-      setTimer((prevTimer) => (prevTimer === 1 ? 10 : prevTimer - 1));
-    }, 1000);
-
     
   
+
+    
     const fetchMealsInterval = setInterval(() => {
       fetchMeals();
-    }, 2000);
-  
+    }, 300000); 
     return () => {
-      clearInterval(timerInterval);
       clearInterval(fetchMealsInterval);
     };
   }, []);
-  useEffect(()=>{
-    if(meal === 5){
-      setTimer(0)
-    }
-    setTimer(10)
-  },[meal])
+
+
+
+  // When meals reach 5, reset timer
+  useEffect(() => {
+    setMeal(userData.meals);
+  }, [ userData.meals]);
 
   return (
     <div className="flex items-center gap-2 sm:gap-0">
       <img src={kitchen} alt="" className="size-10 sm:size-8" />
       <div className="flex flex-col gap-2 w-44 sm:w-24">
         <h1 className="font-semibold text-sm sm:text-xs">
-          {meal === 5 ? "Meals are ready " : "Meal ready in"} {meal === 5 ? "00:00" : `00:${timer.toString().padStart(2, "0")}`}
+          10 min each meal
+          {/* {meal === 5 ? "Meals are ready" : "Meal ready in"} {meal === 5 ? "00:00" : `0${Math.floor(timer / 60)}:${(timer % 60).toString().padStart(2, "0")}`} */}
         </h1>
         {meal !== undefined && (
           <div className="flex mx-auto overflow-hidden rounded-2xl w-[120px] sm:w-[60px] h-3 border">

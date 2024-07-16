@@ -39,7 +39,7 @@ const PokemonData = () => {
       }
     };
 
-    const intervalId = setInterval(fetchHealth, 1000);
+    const intervalId = setInterval(fetchHealth, 2 * 60 * 60 * 1000);
     return () => clearInterval(intervalId);
   }, [selectedPokemon]);
 
