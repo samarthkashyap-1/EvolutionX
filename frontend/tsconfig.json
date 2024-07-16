@@ -1,4 +1,14 @@
 {
+  "compilerOptions": {
+    "strict": false,                    /* Disable all strict type-checking options */
+    "skipLibCheck": true,               /* Skip type checking of all declaration files (*.d.ts) */
+    "forceConsistentCasingInFileNames": true,  /* Disallow inconsistently-cased references to the same file */
+    "resolveJsonModule": true,          /* Enable importing of JSON modules */
+    "baseUrl": "./",                    /* Base directory to resolve non-absolute module names */
+    "paths": {
+      "*": ["src/*"]                    /* Mapping path aliases */
+    }
+  },
   "files": [],
   "references": [
     {
