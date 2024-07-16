@@ -46,6 +46,11 @@ const PokemonData = () => {
   const handleFeed = async () => {
     setLoading(true)
     try {
+      toast.promise(feedPokemon({ pokemonId: selectedPokemon.id }), {
+        loading: "Feeding...",
+        success: "Feed successful",
+        error: "Failed to feed",
+      });
       const FeedData = await feedPokemon({ pokemonId: selectedPokemon.id });
       if (FeedData) {
         setuserData(prevUserData => ({
@@ -55,7 +60,7 @@ const PokemonData = () => {
           totalMealCount: prevUserData.totalMealCount + 1,
         }));
         setHp(prev => prev + 10);
-        toast.success("Feed successful");
+        // toast.success("Feed successful");
       }
     setLoading(false)
 
@@ -70,9 +75,14 @@ const PokemonData = () => {
     setLoading(false)
 
     try {
+      toast.promise(evolvePokemon({ pokemonId: selectedPokemon.id }), {
+        loading: "Evolving...",
+        success: "Evolving Successful",
+        error: "Failed to evolve",
+      });
       const evolving = await evolvePokemon({ pokemonId: selectedPokemon.id });
       if (evolving) {
-        toast.success("Evolving Successful");
+        // toast.success("Evolving Successful");
         setSelectedPokemon(evolving);
         setuserData(prevUserData => {
           const updatedPokemons = prevUserData.pokemons.map(pokemon =>
@@ -96,6 +106,11 @@ const PokemonData = () => {
     setLoading(true)
 
     try {
+      toast.promise(disownPokemon(selectedPokemon.id), {
+        loading: "Removing...",
+        success: "Pokemon Removed",
+        error: "Failed to remove",
+      });
       const disowned = await disownPokemon(selectedPokemon.id);
       if (disowned) {
         toast.success("Pokemon Removed");

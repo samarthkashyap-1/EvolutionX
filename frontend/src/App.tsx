@@ -14,6 +14,7 @@ import { getAllUsers } from "./services/api";
 import { useRecoilState } from "recoil";
 import { allUser, User, UserData } from "./recoil/atom";
 import { Toaster } from "react-hot-toast";
+import Notfound from "./components/Notfound";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -65,6 +66,7 @@ function App() {
           <Route path="/adoptioncenter" element={<PokemonDisplay />} />
           <Route path="/profile/:id" element={<MyPokemons />} />
           <Route path="/topplayer" element={<TopPlayer />} />
+          <Route path="*" element={<Notfound/>} />
         </Route>
       </Routes>
     </div>

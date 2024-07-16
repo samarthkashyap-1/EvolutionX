@@ -40,18 +40,20 @@ const Kitchen = () => {
 
   return (
     <div className="flex items-center gap-2 sm:gap-0">
-      <img src={kitchen} alt="" className="size-10 sm:size-8" />
-      <div className="flex flex-col gap-2 w-44 sm:w-24">
-        <h1 className="font-semibold text-sm sm:text-xs">
-          10 min each meal
+      <img src={kitchen} alt="" className="size-10 sm:hidden" />
+      <div className="flex flex-col gap-1 w-44 sm:w-24 sm:gap-0.5">
+        <h1 className="font-semibold text-xs ">
+          Meals ready: {meal}
           {/* {meal === 5 ? "Meals are ready" : "Meal ready in"} {meal === 5 ? "00:00" : `0${Math.floor(timer / 60)}:${(timer % 60).toString().padStart(2, "0")}`} */}
         </h1>
         {meal !== undefined && (
-          <div className="flex mx-auto overflow-hidden rounded-2xl w-[120px] sm:w-[60px] h-3 border">
+         <>
+          <div className="flex mx-auto overflow-hidden rounded-2xl w-[120px] sm:w-[5rem] h-3  sm:h-2 border">
             {Array(meal).fill(0).map((_, index) => (
-              <div key={index} className="w-6 h-3 border bg-green-500 sm:w-3"></div>
+              <div key={index} className="w-6 h-3 border bg-green-500 sm:w-4 "></div>
             ))}
           </div>
+          <p className='text-[10px] sm:text-[8px] '>prep time: 10 min each</p></>
         )}
       </div>
     </div>
