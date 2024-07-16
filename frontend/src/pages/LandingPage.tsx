@@ -1,4 +1,4 @@
-import React from "react";
+
 import background from "../assets/bg.jpg";
 import { Outlet } from "react-router-dom";
 
