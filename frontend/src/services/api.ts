@@ -1,8 +1,8 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-const BASE_URL = 'https://f2v33x33-3000.inc1.devtunnels.ms';
-// const BASE_URL = import.meta.env.VITE_REACT_APP_URL;
+// const BASE_URL = 'https://f2v33x33-3000.inc1.devtunnels.ms';
+const BASE_URL = import.meta.env.VITE_REACT_APP_URL;
 // console.log(BASE_URL);
 
 
