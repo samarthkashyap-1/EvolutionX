@@ -46,13 +46,10 @@ const PokemonData = () => {
   const handleFeed = async () => {
     setLoading(true)
     try {
-      toast.promise(feedPokemon({ pokemonId: selectedPokemon.id }), {
-        loading: "Feeding...",
-        success: "Feed successful",
-        error: "Failed to feed",
-      });
+      toast("Feeding...");
       const FeedData = await feedPokemon({ pokemonId: selectedPokemon.id });
       if (FeedData) {
+        toast.success("Feeded");
         setuserData(prevUserData => ({
           ...prevUserData,
           meals: prevUserData.meals - 1,
@@ -75,14 +72,10 @@ const PokemonData = () => {
     setLoading(false)
 
     try {
-      toast.promise(evolvePokemon({ pokemonId: selectedPokemon.id }), {
-        loading: "Evolving...",
-        success: "Evolving Successful",
-        error: "Failed to evolve",
-      });
+     toast("Evolving...");
       const evolving = await evolvePokemon({ pokemonId: selectedPokemon.id });
       if (evolving) {
-        // toast.success("Evolving Successful");
+        toast.success("Evolved");
         setSelectedPokemon(evolving);
         setuserData(prevUserData => {
           const updatedPokemons = prevUserData.pokemons.map(pokemon =>

@@ -49,14 +49,10 @@ const PokemonDisplay: React.FC = () => {
 
     
     try {
-      toast.promise(adoptPokemon({ speciesName: name }), {
-        loading: 'Adopting...',
-        success: 'Adopted successfully',
-        error: 'Failed to adopt'
-      });
+     toast('Adopting Pokemon...');
       const adopting = await adoptPokemon({ speciesName: name });
       if (adopting) {
-        
+        toast.success('Pokemon adopted successfully');
         setuserData(prev => ({
           ...userData,
           trophies: prev.trophies + 20,
