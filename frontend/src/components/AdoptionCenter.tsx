@@ -70,14 +70,11 @@ const PokemonDisplay: React.FC = () => {
       setLoading(false);
     }
   };
-
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const newData = data.filter((pokemon) => pokemon.baseForm);
   const currentItems = newData.slice(indexOfFirstItem, indexOfLastItem);
-
   const totalPages = Math.ceil(newData.length / itemsPerPage);
-
   const handlePrevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);

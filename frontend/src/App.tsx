@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy } from "react";
+import { useState, useEffect} from "react";
 import Lottie from "lottie-react";
 import pokiball from "./assets/pokeball-loader.json";
 import { Routes, Route } from "react-router-dom";
@@ -6,15 +6,18 @@ import { getAllUsers } from "./services/api";
 import { useRecoilState } from "recoil";
 import { allUser, User, UserData } from "./recoil/atom";
 import { Toaster } from "react-hot-toast";
-const Notfound = lazy(() => import("./components/Notfound"));
-const PokemonDisplay = lazy(() => import("./components/AdoptionCenter"));
-const MyPokemons = lazy(() => import("./components/MyPokemons"));
-const TopPlayer = lazy(() => import("./components/TopPlayer"));
-const LandingPage = lazy(() => import("./pages/LandingPage"));
-const Navbar = lazy(() => import("./components/Navbar"));
-const Home = lazy(() => import("./components/Home"));
-const Login = lazy(() => import("./components/Login"));
-const Register = lazy(() => import("./components/Register"));
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import AdoptionCenter from "./components/AdoptionCenter";
+import MyPokemons from "./components/MyPokemons";
+import TopPlayer from "./components/TopPlayer";
+import Notfound from "./components/Notfound";
+import LandingPage from "./pages/LandingPage";
+
+
+
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -63,7 +66,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/adoptioncenter" element={<PokemonDisplay />} />
+          <Route path="/adoptioncenter" element={<AdoptionCenter />} />
           <Route path="/profile/:id" element={<MyPokemons />} />
           <Route path="/topplayer" element={<TopPlayer />} />
           <Route path="*" element={<Notfound />} />
