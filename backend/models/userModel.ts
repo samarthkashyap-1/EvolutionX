@@ -16,7 +16,7 @@ const userSchema = new Schema<IUser>({
   hashpass: { type: String, required: true },
   coins: { type: Number, default: 50 },
   trophies: { type: Number, default: 100 },
-    meals: { type: Number, default: 5 , max: 5},
+  meals: { type: Number, default: 5 , max: 5},
   pokemons: [{ type: Schema.Types.ObjectId, ref: 'Pokemon' }] // Reference to Pokemon documents
 });
 

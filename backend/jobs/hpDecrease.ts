@@ -19,23 +19,42 @@ const decreaseHP = async (pokemonId: string) => {
         if (!user) {
           throw new Error(`User not found for Pokemon ID: ${pokemonId}`);
         }
-  
-        if (pokemon.health > 0) {
-          pokemon.health -= 10;
-         
 
+        
+        if (pokemon.lastMealTime){
+
+          const currTime = new Date()
+
+          const timeSinceWeLastEat = currTime.getTime() - pokemon.lastMealTime.getTime()
+          if(timeSinceWeLastEat <= 600000){
+            if (pokemon.health > 0) {
+              pokemon.health -= 10;
+             
+    
+      
+              if (pokemon.health <= 0) {
+                pokemon.health = 0;
+                user.trophies -= 25;
+                user.trophies = user.trophies < 0 ? 0 : user.trophies;
+                pokemon.died = true;
+              } 
+              await pokemon.save({ session });
+                await user.save({ session });
+      
+              
+            }
   
-          if (pokemon.health <= 0) {
-            pokemon.health = 0;
-            user.trophies -= 25;
-            user.trophies = user.trophies < 0 ? 0 : user.trophies;
-            pokemon.died = true;
-          } 
-          await pokemon.save({ session });
-            await user.save({ session });
-  
+            
+          }
+          else{
+            console.log("its not been 10 min for", pokemonId)
+          }
+          }
+
           
-        }
+          
+        
+        
   
         await session.commitTransaction();
         session.endSession();
@@ -50,9 +69,9 @@ const decreaseHP = async (pokemonId: string) => {
       }
     }
   };
-  
+  // 0 */3 * * *
 // Schedule a cron job to run every 3 hrs
-cron.schedule("0 */3 * * *", async () => {
+cron.schedule("*/10 * * * * *", async () => {
   try {
     console.log("Cron job for hp decrease running...");
     const alivePokemons = await Pokemon.find({ died: false });
