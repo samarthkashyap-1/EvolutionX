@@ -26,7 +26,7 @@ const decreaseHP = async (pokemonId: string) => {
           const currTime = new Date()
 
           const timeSinceWeLastEat = currTime.getTime() - pokemon.lastMealTime.getTime()
-          if(timeSinceWeLastEat <= 600000){
+          if(timeSinceWeLastEat >= 600000){
             if (pokemon.health > 0) {
               pokemon.health -= 10;
              
