@@ -1,2 +1,8 @@
 [service]
 path = "backend"
+start = "npm start"  
+
+[build]
+commands = [
+    "cd backend && npm install"
+]
